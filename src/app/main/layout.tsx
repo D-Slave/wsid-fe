@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Flex } from "antd";
-import { Content, Header, Footer } from "antd/es/layout/layout";
+import { Header, Footer } from "antd/es/layout/layout";
 const containerStyle = {
   height: "100vh",
   backgroundColor: "#001529",
@@ -11,6 +11,8 @@ const headerStyle = {
 
 const contentStyle = {
   flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 const footerStyle = {
@@ -22,7 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <Flex vertical={true} style={containerStyle}>
       <Header style={headerStyle}>header</Header>
-      <Content style={contentStyle}>{children}</Content>
+      <Flex style={contentStyle}>{children}</Flex>
       <Footer style={footerStyle}>footer</Footer>
     </Flex>
   );
