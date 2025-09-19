@@ -1,55 +1,43 @@
 "use client";
+
 import React from "react";
 import { Col, Row, Select, Space } from "antd";
 import SectionHeader from "./SectionHeader";
 import { MediumOutlined } from "@ant-design/icons";
 import RecommendationButton from "./RecommendationButton";
-import {
-  peopleOptions,
-  categoryOptions,
-  timeOptions,
-} from "@/constant/movieOptions";
+import { moodOptions, genreOptions } from "@/constant/musicOptions";
 import RecommendationPreview from "./RecommendationPreview";
 
-export const MoviePage = () => {
+export default function CafePage() {
   return (
     <Row style={{ margin: "40px" }} gutter={40}>
       <Col span={14}>
         <SectionHeader
           icon={<MediumOutlined />}
-          title="영화 추천"
-          description="오늘의 기분에 맞는 영화를 추천해드려요."
-          features={[
-            "위치/시간/날씨/동반자 자동 반영",
-            "근처 상영관 & 예매 링크까지 한 번에",
-          ]}
+          title="노래 추천"
+          description="상황·기분·활동에 맞는 곡을 제안합니다."
+          features={["앨범/가수/가사 미리보기", "비슷한 곡/재추천으로 탐색"]}
         />
         <RecommendationPreview />
       </Col>
       <Col span={10}>
         {/* 필터 폼 */}
         <Space direction={"vertical"} style={{ flex: 1, color: "#C7D3F5" }}>
-          <p>인원</p>
+          <p>기분/활동</p>
           <Select
-            defaultValue="2"
+            defaultValue="focus"
             style={{ width: 200 }}
-            options={peopleOptions}
+            options={moodOptions}
           />
           <p>장르</p>
           <Select
-            defaultValue="action"
+            defaultValue="ballad"
             style={{ width: 200 }}
-            options={categoryOptions}
+            options={genreOptions}
           />
-          <p>시간대</p>
-          <Select
-            defaultValue="now"
-            style={{ width: 200 }}
-            options={timeOptions}
-          />
-          <RecommendationButton bgColor="#8FB3FF" />
+          <RecommendationButton bgColor="#E3B0FF" />
         </Space>
       </Col>
     </Row>
   );
-};
+}

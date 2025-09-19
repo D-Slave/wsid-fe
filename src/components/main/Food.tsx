@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { Col, Row, Select, Space } from "antd";
 import SectionHeader from "./SectionHeader";
@@ -6,22 +7,22 @@ import { MediumOutlined } from "@ant-design/icons";
 import RecommendationButton from "./RecommendationButton";
 import {
   peopleOptions,
-  categoryOptions,
-  timeOptions,
-} from "@/constant/movieOptions";
+  foodOptions,
+  priceOptions,
+} from "@/constant/foodOptions";
 import RecommendationPreview from "./RecommendationPreview";
 
-export const MoviePage = () => {
+export default function CafePage() {
   return (
     <Row style={{ margin: "40px" }} gutter={40}>
       <Col span={14}>
         <SectionHeader
           icon={<MediumOutlined />}
-          title="영화 추천"
-          description="오늘의 기분에 맞는 영화를 추천해드려요."
+          title="맛집 추천"
+          description="간단 선택 → 지금 가기 좋은 식당 추천."
           features={[
-            "위치/시간/날씨/동반자 자동 반영",
-            "근처 상영관 & 예매 링크까지 한 번에",
+            "대기/영업/날씨 자동 고려",
+            "사진→위치→메뉴판 순서로 확인",
           ]}
         />
         <RecommendationPreview />
@@ -35,21 +36,21 @@ export const MoviePage = () => {
             style={{ width: 200 }}
             options={peopleOptions}
           />
-          <p>장르</p>
+          <p>음식유형</p>
           <Select
-            defaultValue="action"
+            defaultValue="korean"
             style={{ width: 200 }}
-            options={categoryOptions}
+            options={foodOptions}
           />
-          <p>시간대</p>
+          <p>예산(1인)</p>
           <Select
-            defaultValue="now"
+            defaultValue="10000"
             style={{ width: 200 }}
-            options={timeOptions}
+            options={priceOptions}
           />
-          <RecommendationButton bgColor="#8FB3FF" />
+          <RecommendationButton bgColor="#FFC48A" />
         </Space>
       </Col>
     </Row>
   );
-};
+}
