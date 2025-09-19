@@ -1,3 +1,4 @@
+import { RecommendationProvider } from "@/context/RecommendationContext";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AntdRegistry>{children}</AntdRegistry>
+        <RecommendationProvider>
+          <AntdRegistry>{children}</AntdRegistry>
+        </RecommendationProvider>
       </body>
     </html>
   );
