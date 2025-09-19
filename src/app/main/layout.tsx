@@ -1,31 +1,42 @@
-import { ReactNode } from "react";
-import { Flex } from "antd";
+"use client";
+
+import { ReactNode, useContext } from "react";
 import { Header, Footer } from "antd/es/layout/layout";
-const containerStyle = {
-  height: "100vh",
-  backgroundColor: "#001529",
-};
-const headerStyle = {
-  height: "60px",
-};
-
-const contentStyle = {
-  flex: 1,
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const footerStyle = {
-  height: "60px",
-  backgroundColor: "#001529",
-};
+import { RecommendationContext } from "@/context/RecommendationContext";
+import { Flex } from "antd";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const { activeTab } = useContext(RecommendationContext)!;
+
+  const bgMap: Record<string, string> = {
+    영화: "#1C2436",
+    카페: "#1D2D25",
+    맛집: "#32261B",
+    음악: "#322133",
+  };
+
+  const bgColor = bgMap[activeTab];
+
   return (
-    <Flex vertical={true} style={containerStyle}>
-      <Header style={headerStyle}>header</Header>
-      <Flex style={contentStyle}>{children}</Flex>
-      <Footer style={footerStyle}>footer</Footer>
+    <Flex
+      vertical
+      style={{
+        minHeight: "100vh",
+        backgroundColor: bgColor,
+        color: "#fff",
+      }}
+    >
+      <Header style={{ background: "transparent", height: "60px" }}>
+        header
+      </Header>
+
+      <Flex style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        {children}
+      </Flex>
+
+      <Footer style={{ background: "transparent", height: "60px" }}>
+        footer
+      </Footer>
     </Flex>
   );
 }
