@@ -1,6 +1,22 @@
 import React from "react";
+import { Dropdown } from "antd";
+import type { MenuProps } from "antd";
+import { useRouter } from "next/navigation";
+import { SmallDashOutlined } from "@ant-design/icons";
 
 export default function MainHeader() {
+  const router = useRouter();
+
+  const items: MenuProps["items"] = [
+    { key: "login", label: "로그인" },
+    { key: "signup", label: "회원가입" },
+  ];
+
+  const onMenuClick: MenuProps["onClick"] = ({ key }) => {
+    if (key === "login") router.push("/login");
+    else if (key === "signup") router.push("/signup");
+  };
+
   return (
     <div
       style={{
@@ -13,14 +29,24 @@ export default function MainHeader() {
       }}
     >
       <div style={{ fontWeight: 600 }}>오늘 뭐하지?</div>
-      <div
-        style={{
-          width: 28,
-          height: 28,
-          borderRadius: "50%",
-          border: "2px solid #5F5CF1",
-        }}
-      />
+      <Dropdown menu={{ items, onClick: onMenuClick }} placement="bottomRight">
+        <button
+          aria-label="user actions"
+          style={{
+            width: 32,
+            height: 32,
+            borderRadius: 8,
+            border: "1px solid #E6E8EB",
+            background: "transparent",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <SmallDashOutlined style={{ fontSize: 18, color: "#5F5CF1" }} />
+        </button>
+      </Dropdown>
     </div>
   );
 }
