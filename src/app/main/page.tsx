@@ -1,114 +1,60 @@
 "use client";
 
-import React, { useContext, useRef } from "react";
-import { Carousel } from "antd";
-import { MoviePage } from "@/components/main/Movie";
-import type { CarouselRef } from "antd/es/carousel";
-import {
-  RecommendationContext,
-  RecommendationType,
-} from "@/context/RecommendationContext";
-import CafePage from "@/components/main/Cafe";
-import RecommendationTap from "@/components/main/RecommendationTap";
-import FoodPage from "@/components/main/Food";
-import MusicPage from "@/components/main/Music";
+import React, { useContext } from "react";
+import { Button, Divider, Row, Col } from "antd";
+import { useRouter } from "next/navigation";
+import { RecommendationContext } from "@/context/RecommendationContext";
+import type { Category } from "@/components/main/constants/Category";
+import { Categories } from "@/components/main/constants/CategoriesData";
+import MainCard from "@/components/main/MainCard";
+import MainCategories from "@/components/main/MainCategories";
 
-const carouselStyle = {
-  width: "800px",
-  height: "600px",
-  borderRadius: "16px",
-  border: "1px solid rgb(90, 92, 94)",
-  opacity: 0.8,
-};
+export default function MainPage() {
+  const router = useRouter();
+  const { setActiveTab } = useContext(RecommendationContext)!;
 
-const TapButton: Tab[] = [
-  {
-    id: 1,
-    title: "영화",
-    bgColor: "#1C2436",
-  },
-  {
-    id: 2,
-    title: "카페",
-    bgColor: "#1D2D25",
-  },
-  {
-    id: 3,
-    title: "맛집",
-    bgColor: "#32261B",
-  },
-  {
-    id: 4,
-    title: "음악",
-    bgColor: "#322133",
-  },
-];
+  const goto = (c: Category) => {
+    setActiveTab(c.key);
+    router.push(c.path);
+  };
 
-export type Tab = {
-  id: number;
-  title: RecommendationType;
-  bgColor: string;
-};
-
-const MainPage = () => {
-  const { activeTab, setActiveTab } = useContext(RecommendationContext)!;
-
-  const carouselRef = useRef<CarouselRef>(null);
-
-  const handleTabClick = (tab: Tab, idx: number) => {
-    setActiveTab(tab.title);
-
-    if (carouselRef.current) {
-      carouselRef.current.goTo(idx);
-    }
+  const randomGo = () => {
+    const r = Categories[Math.floor(Math.random() * Categories.length)];
+    goto(r);
   };
 
   return (
-    <div>
-      <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
-        {TapButton.map((tab, idx) => (
-          <RecommendationTap
-            key={tab.id}
-            title={tab.title}
-            bgColor={tab.bgColor}
-            onClick={() => handleTabClick(tab, idx)}
-          />
-        ))}
-      </div>
+    <Row
+      style={{
+        width: "100vw",
+        margin: "0 auto",
+        padding: "16px",
+      }}
+      gutter={[16, 40]}
+      align="top"
+    >
+      <MainCard />
+      <MainCategories categories={Categories} />
 
-      {/* 캐러셀 */}
-      <Carousel
-        ref={carouselRef}
-        dots
-        arrows
-        infinite={false}
-        style={{
-          ...carouselStyle,
-          backgroundColor: TapButton.find((t) => t.title === activeTab)
-            ?.bgColor,
-        }}
-        afterChange={(current) => {
-          const currentTab = TapButton[current];
-          if (currentTab) {
-            setActiveTab(currentTab.title);
-          }
-        }}
-      >
-        <div>
-          <MoviePage />
-        </div>
-        <div>
-          <CafePage />
-        </div>
-        <div>
-          <FoodPage />
-        </div>
-        <div>
-          <MusicPage />
-        </div>
-      </Carousel>
-    </div>
+      <Col span={24}>
+        <Divider style={{ margin: "4px 0 12px", borderColor: "#E9E9EF" }} />
+
+        {/* 랜덤 추천받기 버튼 */}
+
+        <Button
+          type="primary"
+          size="large"
+          onClick={randomGo}
+          style={{
+            width: "100%",
+            height: 44,
+            borderRadius: 22,
+            background: "#6F6CF3",
+          }}
+        >
+          랜덤 추천받기
+        </Button>
+      </Col>
+    </Row>
   );
-};
-
-export default MainPage;
+}
