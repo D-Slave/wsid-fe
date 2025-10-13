@@ -3,18 +3,20 @@ import { useRouter } from "next/navigation";
 import React, { createElement } from "react";
 import type { Category } from "@/components/main/constants/Category";
 
-
-
 const rowStyle = {
-  width: '100vw',
-  height: '10vh'
-}
+  width: "100vw",
+  height: "10vh",
+};
 const colStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-}
+  display: "flex",
+  justifyContent: "space-between",
+};
 
-export default function MainCategories({ categories }: { categories: Category[] }) {
+export default function MainCategories({
+  categories,
+}: {
+  categories: Category[];
+}) {
   const router = useRouter();
   // const { setActiveTab } = useContext(RecommendationContext)!;
   
@@ -23,12 +25,10 @@ export default function MainCategories({ categories }: { categories: Category[] 
     router.push(c.path);
   };
 
-  
   return (
     <Row style={rowStyle}>
     <Col span={24} style={colStyle}>
       {categories.map((category) => (
-        
       <button
             key={category.key}
             onClick={() => goto(category)}
@@ -55,9 +55,10 @@ export default function MainCategories({ categories }: { categories: Category[] 
             >
               {createElement(category.icon, { style: category.iconStyle })}
             </div>
-            <div style={{ fontSize: 12, color: "#5A5C5E" }}>{category.label}</div>
+            <div style={{ fontSize: 12, color: "#5A5C5E" }}>
+              {category.label}
+            </div>
           </button>
-        
       ))}
     </Col>
     </Row>
