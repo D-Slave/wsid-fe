@@ -7,7 +7,7 @@ import SocialLogin from "@/components/login/SocialLogin";
 import LoginContent from "@/components/login/LoginContent";
 
 export default function LoginPage() {
-  const startOAuth = (provider: "google" | "github" | "kakao") => {
+  const startOAuth = (provider: "google" | "kakao" | "naver") => {
     window.location.href = `/auth/${provider}`;
   };
 

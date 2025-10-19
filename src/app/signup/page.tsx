@@ -202,24 +202,25 @@ export default function SignupPage() {
             <Form.Item name="age" label="나이">
               <Input size="large" type="number" />
             </Form.Item>
-
             <Form.Item
               name="gender"
               label="성별"
               rules={[{ validator: validateGender }]}
             >
-              <Button
-                onClick={() => handleGender("male")}
-                type={selectedGender === "male" ? "primary" : "default"}
-              >
-                남성
-              </Button>
-              <Button
-                onClick={() => handleGender("female")}
-                type={selectedGender === "female" ? "primary" : "default"}
-              >
-                여성
-              </Button>
+              <Space direction="horizontal" size={16}>
+                <Button
+                  onClick={() => handleGender("male")}
+                  type={selectedGender === "male" ? "primary" : "default"}
+                >
+                  남성
+                </Button>
+                <Button
+                  onClick={() => handleGender("female")}
+                  type={selectedGender === "female" ? "primary" : "default"}
+                >
+                  여성
+                </Button>
+              </Space>
             </Form.Item>
 
             <Form.Item
