@@ -26,7 +26,7 @@ export default function MainPage() {
   return (
     <Row
       style={{
-        width: "100vw",
+        width: "400px",
         margin: "0 auto",
         padding: "16px",
       }}

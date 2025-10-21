@@ -1,8 +1,8 @@
 import React from "react";
-import { Dropdown } from "antd";
+import { Button, Dropdown, Typography } from "antd";
 import type { MenuProps } from "antd";
 import { useRouter } from "next/navigation";
-import { SmallDashOutlined } from "@ant-design/icons";
+import { SmallDashOutlined, LeftOutlined } from "@ant-design/icons";
 
 export default function MainHeader() {
   const router = useRouter();
@@ -28,7 +28,20 @@ export default function MainHeader() {
         padding: "0 16px",
       }}
     >
-      <div style={{ fontWeight: 600 }}>오늘 뭐하지?</div>
+      <button
+        onClick={() => router.back()}
+        style={{
+          background: "transparent",
+          border: "none",
+          cursor: "pointer",
+          padding: 0,
+        }}
+      >
+        <LeftOutlined style={{ fontSize: 18, color: "#000" }} />
+      </button>
+      <a href="/main" style={{ marginTop: "12px" }}>
+        <Typography.Title level={4}>오늘 뭐하지?</Typography.Title>
+      </a>
       <Dropdown menu={{ items, onClick: onMenuClick }} placement="bottomRight">
         <button
           aria-label="user actions"
@@ -50,5 +63,3 @@ export default function MainHeader() {
     </div>
   );
 }
-
-
