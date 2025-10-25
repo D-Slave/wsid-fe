@@ -1,7 +1,9 @@
 export const peopleOptions = [
+  { label: "1명", value: "1" },
   { label: "2명", value: "2" },
   { label: "3명", value: "3" },
   { label: "4명", value: "4" },
+  { label: "5명", value: "5" },
 ];
 export const foodOptions = [
   { label: "한식", value: "korean" },
