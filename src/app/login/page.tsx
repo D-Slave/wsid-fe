@@ -7,10 +7,6 @@ import SocialLogin from "@/components/login/SocialLogin";
 import LoginContent from "@/components/login/LoginContent";
 
 export default function LoginPage() {
-  const startOAuth = (provider: "google" | "kakao" | "naver") => {
-    window.location.href = `/auth/${provider}`;
-  };
-
   return (
     <Row
       style={{
@@ -25,7 +21,7 @@ export default function LoginPage() {
         <Space direction="vertical" size={16} style={{ width: "100%" }}>
           <LoginContent />
           <Space direction="vertical" size={12} style={{ width: "100%" }}>
-            <SocialLogin startOAuth={startOAuth} />
+            <SocialLogin />
           </Space>
 
           <Typography.Paragraph style={{ marginTop: 8, textAlign: "center" }}>
