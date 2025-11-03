@@ -1,6 +1,6 @@
 "use client";
 
-import { Col, Flex, Image, Row, Typography } from "antd";
+import { Col, Image, Row, Typography } from "antd";
 
 const wrapStyle = {
   border: "1px solid #E1E3E8",

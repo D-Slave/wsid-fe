@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from "react";
 import { Flex } from "antd";
-import { Header, Footer } from "antd/es/layout/layout";
+import { Header } from "antd/es/layout/layout";
 import MainHeader from "@/components/main/MainHeader";
 
 export default function RootLayout({ children }: { children: ReactNode }) {

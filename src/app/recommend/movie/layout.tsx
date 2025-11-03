@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Button, Flex, Row } from "antd";
+import { Flex } from "antd";
 import { Header } from "antd/es/layout/layout";
 import RecommendHeader from "@/components/recommend/Header";
 const wrapStyle = {

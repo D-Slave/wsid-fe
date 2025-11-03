@@ -1,6 +1,6 @@
 "use client";
 import MovieInfo from "@/components/movie/MovieInfo";
-import { Col, Row, Space } from "antd";
+import { Col, Row } from "antd";
 import MovieActor from "@/components/movie/MovieActor";
 import SimilarMovie from "@/components/movie/SimilarMovie";
 

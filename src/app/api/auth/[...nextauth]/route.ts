@@ -10,9 +10,6 @@ export const dynamic = "force-dynamic";
 
 const {
   handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
 } = NextAuth({
   providers: [
     NaverProvider({
@@ -30,10 +27,10 @@ const {
       return { ...token, ...user };
     },
 
-    async session({ session, token }) {
-      session.user = token as any;
-      return session;
-    },
+    // async session({ session, token }) {
+    //   session.user = token as any;
+    //   return session;
+    // },
   },
 });
 

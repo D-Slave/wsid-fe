@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Card, Form, Space, Typography } from "antd";
+import { Button, Card, Form, Space, Typography, Image } from "antd";
 import {
   foodOptions,
   peopleOptions,
@@ -53,7 +53,7 @@ export default function FoodInfo({ onSubmit }: FoodInfoProps) {
       hoverable={false}
       style={CARD_STYLE}
       cover={
-        <img
+        <Image
           draggable={false}
           alt="맛집 추천 이미지"
           src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
