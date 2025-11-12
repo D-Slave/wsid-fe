@@ -122,13 +122,18 @@ export default function SignupPage() {
   const handleSubmit = async (values: FormData) => {
     try {
       console.log("회원가입 데이터:", values);
-      // TODO: API 호출
-      // const response = await fetch('/api/signup', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(values)
-      // });
-      alert("회원가입이 완료되었습니다!");
+       //TODO: API 호출
+       const response = await fetch('http://localhost:8080/api/v1/user/signup', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(values)
+       });
+      if (response.ok) {
+        alert("회원가입이 완료되었습니다!");
+        window.location.href = "http://localhost:3000/login"; // ✅ 절대주소 이동
+      } else {
+        alert("회원가입 실패! 다시 시도해주세요.");
+      }
     } catch (error) {
       console.error("회원가입 오류:", error);
       alert("회원가입 중 오류가 발생했습니다.");
