@@ -1,7 +1,4 @@
 import NextAuth from "next-auth";
-import type { Session } from "next-auth";
-import type { Provider } from "next-auth/providers";
-import GoogleProvider from "next-auth/providers/google";
 import NaverProvider from "next-auth/providers/naver";
 import KakaoProvider from "next-auth/providers/kakao";
 
@@ -22,15 +19,34 @@ const {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      // 리턴되는 값들은 token에 저장된다.
-      return { ...token, ...user };
+    async jwt({ token, user, account }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
+        token.provider = account.provider;
+        token.providerAccountId = account.providerAccountId;
+      }
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name || null;
+        token.image = user.image;
+      }
+      return token;
     },
 
-    // async session({ session, token }) {
-    //   session.user = token as any;
-    //   return session;
-    // },
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user = {
+          ...session.user,
+          id: token.id as string,
+          accessToken: token.accessToken as string,
+          provider: token.provider as string,
+          providerAccountId: token.providerAccountId as string,
+        };
+      }
+      return session;
+    },
   },
 });
 

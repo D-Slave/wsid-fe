@@ -1,6 +1,7 @@
 import { RecommendationProvider } from "@/context/RecommendationContext";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { SessionProvider } from "@/components/providers/SessionProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,9 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <RecommendationProvider>
-          <AntdRegistry>{children}</AntdRegistry>
-        </RecommendationProvider>
+        <SessionProvider>
+          <RecommendationProvider>
+            <AntdRegistry>{children}</AntdRegistry>
+          </RecommendationProvider>
+        </SessionProvider>
       </body>
     </html>
   );
