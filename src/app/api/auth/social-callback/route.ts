@@ -40,11 +40,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       code: result?.code,
       message: result?.message,
-      data: {
-        user: result?.user,
-        token: result?.token,
-        refreshToken: result?.refreshToken,
-      },
+      data: result?.data,
     });
   } catch (error) {
     console.error("소셜 로그인 콜백 실패:", error);

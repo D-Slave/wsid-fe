@@ -28,12 +28,6 @@ export function useSocialAuth() {
             code: string;
             message?: string;
             data: {
-              user: {
-                id: string;
-                email: string;
-                name?: string;
-                [key: string]: unknown;
-              };
               token: string;
               refreshToken: string;
             };
