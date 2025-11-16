@@ -1,4 +1,7 @@
-const BACKEND_API_URL = process.env.BACKEND_API_URL;
+const BACKEND_API_URL =
+  process.env.NEXT_PUBLICK_BACKEND_API_URL ||
+  process.env.BACKEND_API_URL ||
+  "http://localhost:8080";
 
 export interface BackendResponse<T> {
   code: string;
@@ -30,7 +33,7 @@ export interface AuthResponse {
 }
 
 export async function emailLogin(data: LoginRequest) {
-  const url = `${BACKEND_API_URL}/api/v1/auth/login`;
+  const url = `${BACKEND_API_URL}/api/v1/user/login`;
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -55,7 +58,7 @@ export async function emailLogin(data: LoginRequest) {
 }
 
 export async function socialLogin(data: SocialLoginRequest) {
-  const url = `${BACKEND_API_URL}/api/v1/auth/social-login`;
+  const url = `${BACKEND_API_URL}/api/v1/user/social-login`;
   try {
     const response = await fetch(url, {
       method: "POST",

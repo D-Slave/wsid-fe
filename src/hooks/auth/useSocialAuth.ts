@@ -1,15 +1,26 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { apiGet } from "@/lib/api-client";
 import { saveTokenToStorage } from "@/lib/token-storage";
 
 export function useSocialAuth() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const processedEmailRef = useRef<string | null>(null);
 
   useEffect(() => {
+    const userEmail = session?.user?.email;
+    if (
+      !userEmail ||
+      status !== "authenticated" ||
+      processedEmailRef.current === userEmail
+    ) {
+      return;
+    }
+    processedEmailRef.current = userEmail;
+
     async function handleSocialAuth() {
       if (status === "authenticated" && session?.user?.email) {
         try {
@@ -37,5 +48,10 @@ export function useSocialAuth() {
       }
     }
     handleSocialAuth();
-  }, [session, status, router]);
+  }, [status, session?.user?.email, router]);
+  useEffect(() => {
+    if (status === "authenticated") {
+      processedEmailRef.current = null;
+    }
+  }, [status]);
 }

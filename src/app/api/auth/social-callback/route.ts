@@ -41,9 +41,9 @@ export async function GET(request: NextRequest) {
       code: result?.code,
       message: result?.message,
       data: {
-        user: result?.data.user,
-        token: result?.data.token,
-        refreshToken: result?.data.refreshToken,
+        user: result?.user,
+        token: result?.token,
+        refreshToken: result?.refreshToken,
       },
     });
   } catch (error) {
