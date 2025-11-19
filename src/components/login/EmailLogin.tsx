@@ -1,22 +1,44 @@
 "use client";
-import { Form, Input } from "antd";
+
+import { Input } from "antd";
+import { useState } from "react";
 
 export interface LoginFormData {
   email: string;
   password: string;
 }
+
 interface EmailLoginProps {
-  onSubmit: (values: LoginFormData) => void;
+  onChange: (values: LoginFormData) => void;
 }
-export default function EmailLogin({ onSubmit }: EmailLoginProps) {
+
+export default function EmailLogin({ onChange }: EmailLoginProps) {
+  const [values, setValues] = useState<LoginFormData>({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (key: keyof LoginFormData, value: string) => {
+    const newValues = { ...values, [key]: value };
+    setValues(newValues);
+    onChange(newValues);
+  };
+
   return (
-    <Form onFinish={onSubmit}>
-      <Form.Item name="email">
-        <Input placeholder="Email" type="email" />
-      </Form.Item>
-      <Form.Item name="password">
-        <Input.Password placeholder="Password" />
-      </Form.Item>
-    </Form>
+    <div style={{ width: "100%" }}>
+      <Input
+        placeholder="Email"
+        type="email"
+        style={{ marginBottom: 12 }}
+        value={values.email}
+        onChange={(e) => handleChange("email", e.target.value)}
+      />
+
+      <Input.Password
+        placeholder="Password"
+        value={values.password}
+        onChange={(e) => handleChange("password", e.target.value)}
+      />
+    </div>
   );
 }
