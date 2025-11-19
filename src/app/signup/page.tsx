@@ -128,12 +128,17 @@ export default function SignupPage() {
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify(values)
        });
-      if (response.ok) {
-        alert("회원가입이 완료되었습니다!");
-        window.location.href = "http://localhost:3000/login"; // ✅ 절대주소 이동
-      } else {
-        alert("회원가입 실패! 다시 시도해주세요.");
+       
+      const data = await response.json();
+
+      if (data.userId === -1) {
+        alert(data.message);
+        return;
       }
+
+      alert("회원가입이 완료되었습니다!");
+      window.location.href = "http://localhost:3000/login"; // ✅ 절대주소 이동
+      
     } catch (error) {
       console.error("회원가입 오류:", error);
       alert("회원가입 중 오류가 발생했습니다.");
