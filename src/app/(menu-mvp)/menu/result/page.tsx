@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import RestaurantResultCard from "@/features/menu-mvp/components/restaurant-result-card";
 import {
@@ -19,7 +19,7 @@ const modeLabelMap: Record<RecommendationMode, string> = {
 
 const priceLabelMap = { LOW: "저가", MID: "중가", HIGH: "고가" } as const;
 
-export default function MenuResultPage() {
+function MenuResultContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -177,5 +177,23 @@ export default function MenuResultPage() {
         </p>
       )}
     </>
+  );
+}
+
+function MenuResultLoading() {
+  return (
+    <section className="menu-mvp-card menu-mvp-fade-up">
+      <p className="menu-mvp-card-desc" style={{ margin: 0 }}>
+        추천 결과를 불러오는 중...
+      </p>
+    </section>
+  );
+}
+
+export default function MenuResultPage() {
+  return (
+    <Suspense fallback={<MenuResultLoading />}>
+      <MenuResultContent />
+    </Suspense>
   );
 }
