@@ -1,5 +1,5 @@
 "use client";
-import { Flex, Row, Space, Typography } from "antd";
+import { Row, Space, Typography } from "antd";
 import HashTag from "@/components/hashtag/HashTag";
 
 export default function HashtagPage() {

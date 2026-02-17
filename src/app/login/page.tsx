@@ -7,24 +7,8 @@ import { useRouter } from "next/navigation";
 import SocialLogin from "@/components/login/SocialLogin";
 import LoginContent from "@/components/login/LoginContent";
 import EmailLogin, { LoginFormData } from "@/components/login/EmailLogin";
-import { apiPost } from "@/lib/api-client";
 import { saveTokenToStorage } from "@/lib/token-storage";
 
-
-interface LoginResponse {
-  code: string;
-  message?: string;
-  data: {
-    user: {
-      id: string;
-      email: string;
-      name?: string;
-      [key: string]: unknown;
-    };
-    token: string;
-    refreshToken: string;
-  };
-}
 export default function LoginPage() {
   const router = useRouter();
   const [formValues, setFormValues] = useState<LoginFormData>({

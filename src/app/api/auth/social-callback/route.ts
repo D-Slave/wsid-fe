@@ -1,13 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-import { BackendResponse, socialLogin } from "@/lib/backend-auth";
+import { socialLogin } from "@/lib/backend-auth";
 import { auth } from "@/lib/auth-config";
 
 /**
  * 소셜 로그인 후 백엔드 JWT 받기
  * GET /api/auth/social-callback
  */
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // NextAuth 세션 확인
     const session = await auth();

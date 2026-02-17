@@ -43,9 +43,11 @@ export function useSocialAuth() {
           if (response.data?.token) {
             saveTokenToStorage(response.data.token, response.data.refreshToken);
           }
-          response.data?.newFlag
-            ? router.push("/signup/hashtag")
-            : router.push("/main");
+          if (response.data?.newFlag) {
+            router.push("/signup/hashtag");
+          } else {
+            router.push("/main");
+          }
         } catch (error) {
           console.error("소셜 로그인 실패 : ", error);
         }
